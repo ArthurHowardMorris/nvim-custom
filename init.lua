@@ -4,7 +4,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank({ timeout = 200 })
   end,
 })
-
+-- set rel lines on by default
+vim.wo.relativenumber = true
+-- set spelling on 
+vim.opt.spelllang = 'en_us'
+vim.opt.spell = true
 -- EXAMPLES:
 -- local autocmd = vim.api.nvim_create_autocmd
 
