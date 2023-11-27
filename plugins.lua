@@ -51,6 +51,9 @@ local plugins = {
     'dhruvasagar/vim-table-mode',
     lazy = false,
   },
+-- {
+    -- 'roxma/vim-tmux-clipboard',
+  -- },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
