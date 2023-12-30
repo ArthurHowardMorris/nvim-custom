@@ -1,0 +1,109 @@
+{
+	// Place your snippets for stata here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+
+	"delimit semicolon": {
+		"prefix": "#d",
+		"body": [
+			"#delimit ;",
+			"${2:semicolonDelimitedCommand}"
+			"$0"
+			";"
+			"#delimit cr"
+		],
+		"description": "Log output to console"
+	},
+
+	"drop and check dups by varlist": {
+		"prefix": "dup",
+		"body": [
+			"/* drop dups and check for unique id */"
+			"duplicates drop "
+			"duplicates r ${2:unique_varlist}"
+			"assert `r(unique_value)' == _N"
+			"$0"
+		],
+		"description": "drop duplicates and check that varlist is unique"
+	},
+
+	"frame put command": {
+		"prefix": "frame p",
+		"body": [
+			"frame put ${1:varlist} ${2:if condition}, into(${3:newFrame})" 
+            "$0"
+		],
+		"description": "frame put command"
+	},
+
+	"label vars command": {
+		"prefix": "lab var",
+		"body": [
+			"label variable ${1:varname} \"${2:label}\"" 
+            "$0"
+		],
+		"description": "label vars command"
+	},
+
+	"catch missings at the top": {
+		"prefix": "geq",
+		"body": "(${1:varname} > ${2:numeric} & !mi(${1:varname}))",
+		"description": "remind yourself that '.' is pos inf in stata"
+	},
+
+	"stat sig stars": {
+		"prefix": "star",
+		"body": "star(* .1 ** .05 *** .01)$0",
+		"description": "stars for esttab"
+	}
+
+	"subinstr expression": {
+		"prefix": "subinstr",
+		"body": "subinstr(\"${1:look in this}\", \"${2:for this}\", \"${3:sub this}\",${4:.})",
+		"des"
+	}
+
+	"reghdfe": {
+		"prefix": "reghdfe"
+		"body": [
+			"#delimit ;"
+			"`reghdfe'"
+    			"\t${1:`y'}"
+    			"\t${2:`x'}"
+    			"\t${3:`X'}"
+    			"\t,"
+    			"\tabsorb( ${4:`FE'} )"
+    			"\tcluster( ${5:`CL'} )"
+    			"\t${6:nocons}"
+				"\t;"
+			"#delimit cr"
+
+		]
+	}
+	"header": {
+		"prefix": "headerStata"
+		"body": [
+			"************************************",
+			"* Name: ${1: Arthur Morris}",
+			"* Date: $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+			"* Description: ${2: description}",
+			"* Project Root:"
+			"${2: TODO: WRITE THIS}"
+			"* Input:"
+			"\tlocal inhere ${3: path/to/inhere}"
+			"* Output:"
+			"\tlocal outhere ${3: path/to/outhere}"
+			"************************************"
+		]
+	}
+}
